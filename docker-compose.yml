@@ -1,0 +1,55 @@
+version: "3.9"
+
+services:
+
+  backend:
+    build: ./backend
+    container_name: gaint-backend
+    ports:
+      - "8000:8000"
+    environment:
+      DATABASE_URL: postgresql://postgres:Clout%23123@db:5432/interns
+      JUDGE0_URL: http://judge0-master-server-1:2358
+    networks:
+      - gaint-network
+
+  frontend:
+    build: ./frontend
+    container_name: gaint-frontend
+    ports:
+      - "5176:5173"
+    depends_on:
+      - backend
+    networks:
+      - gaint-network
+
+  internweb:
+    build: ./internweb
+    container_name: gaint-internweb
+    ports:
+      - "5175:5174"
+    depends_on:
+      - backend
+    networks:
+      - gaint-network
+
+  db:
+    image: postgres:17
+    container_name: gaint-db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: "Clout#123"
+      POSTGRES_DB: interns
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - gaint-network
+
+networks:
+  gaint-network:
+    external: true
+
+volumes:
+  postgres_data:

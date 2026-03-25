@@ -2,7 +2,7 @@ import * as vscode from "vscode";
 import axios from "axios";
 
 const TOKEN_KEY = "internapp_token";
-const BASE_URL = "http://127.0.0.1:8000";
+const BASE_URL = "http://168.144.19.223/:8000";
 
 axios.defaults.baseURL = BASE_URL;
 

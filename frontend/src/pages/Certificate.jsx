@@ -17,6 +17,7 @@ export default function CertificatePage() {
         const token = localStorage.getItem("token");
         if (!token) {
           setError("Not logged in");
+          
           return;
         }
 
